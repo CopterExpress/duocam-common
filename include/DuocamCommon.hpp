@@ -15,6 +15,7 @@ namespace DuocamCommon
 
     struct CameraDoPhotoPayload
     {
+        float duration;
         double lattitude;
         double longitude;
         float altitude;
@@ -23,14 +24,14 @@ namespace DuocamCommon
 
     struct CameraCommand
     {
-        enum MessageType : std::uint8_t
+        enum CommandType : std::uint8_t
         {
             DoPhoto = 0,
             StartRecord,
             StopRecond
         };
 
-        MessageType type;
+        CommandType type;
 
         CameraDoPhotoPayload doPhotoPayload;
     } __attribute__((packed));
@@ -39,13 +40,15 @@ namespace DuocamCommon
 
     struct CameraAnswer
     {
-        enum MessageType : std::uint8_t
+        CameraCommand::CommandType type;
+
+        enum CommandResult : std::uint8_t
         {
             Ack = 0,
             Nack
         };
-
-        MessageType type;
+        
+        CommandResult result;
 
         char comment[cameraAnswerCommentSize + 1];
     } __attribute__((packed));
