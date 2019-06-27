@@ -36,7 +36,7 @@ namespace DuocamCommon
         CameraDoPhotoPayload doPhotoPayload;
     } __attribute__((packed));
 
-    inline static const int cameraAnswerCommentSize = 40;
+    const int cameraAnswerCommentSize = 40;
 
     struct CameraAnswer
     {
