@@ -9,8 +9,8 @@ namespace DuocamCommon
 {
     namespace QueuePaths
     {
-            inline static const std::string Camera = "/duocam_camera";
-            inline static const std::string Mavlink = "/duocam_mavlink";
+        const char* const Camera = "/duocam_camera";
+        const char* const Mavlink = "/duocam_mavlink";
     };
 
     struct CameraDoPhotoPayload
