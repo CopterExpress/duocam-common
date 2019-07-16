@@ -28,7 +28,7 @@ namespace DuocamCommon
         {
             DoPhoto = 0,
             StartRecord,
-            StopRecond
+            StopRecord
         };
 
         CommandType type;
