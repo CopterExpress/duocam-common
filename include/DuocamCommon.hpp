@@ -37,11 +37,13 @@ namespace DuocamCommon
             StopRecord,
             ChangeProperty
         };
-
         CommandType type;
 
-        CameraChangePropertyPayload changePropertyPayload;
-        CameraDoPhotoPayload doPhotoPayload;
+        union
+        {
+            CameraChangePropertyPayload changePropertyPayload;
+            CameraDoPhotoPayload doPhotoPayload;
+        };
     } __attribute__((packed));
 
     const int cameraAnswerCommentSize = 40;
