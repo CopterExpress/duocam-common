@@ -15,7 +15,6 @@ namespace DuocamCommon
 
     struct CameraDoPhotoPayload
     {
-        float duration;
         double lattitude;
         double longitude;
         float altitude;
