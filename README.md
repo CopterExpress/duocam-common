@@ -11,6 +11,8 @@ On the external event MAVLink service creates **DuocamCommon::CameraCommand** me
 
 MAVLink service waits configurable command timeout time for an answer from CameraDriver. If the answer isn't arrived, the command is marked as failed.
 
+**WARNING!** If **NO GPS** mode is enabled, the camera coordinates and altitude are set to **NaN**.
+
 ## DuocamCommon::CameraAnswer
 
 The camera driver sends an answer **only** when the operation is completed/failed and the driver is ready to recieve a new command of the **same type** (**DuocamCommon::CameraAnswer::type**). Possible answer types:
