@@ -22,18 +22,28 @@ namespace DuocamCommon
         std::time_t time;
     };
 
+    struct CameraChangePropertyPayload
+    {
+        float propertyId;
+        float value;
+    };
+
     struct CameraCommand
     {
         enum CommandType : std::uint8_t
         {
             DoPhoto = 0,
             StartRecord,
-            StopRecord
+            StopRecord,
+            ChangeProperty
         };
-
         CommandType type;
 
-        CameraDoPhotoPayload doPhotoPayload;
+        union
+        {
+            CameraChangePropertyPayload changePropertyPayload;
+            CameraDoPhotoPayload doPhotoPayload;
+        };
     } __attribute__((packed));
 
     const int cameraAnswerCommentSize = 40;
