@@ -1,6 +1,6 @@
 # DuoCam Camera Driver and MAVLink Service Intercommunication Protocol
 
-The protocol is based on **POSIX message queues** (https://linux.die.net/man/7/mq_overview). Every side is responsible for the creation and the destruction of the **recieving** queue (that means the application has to **unlink** the queue before the exit). Camera driver creates a queue of **DuocamCommon::CameraCommand** messages, MAVLink service - a queue of **DuocamCommon::CameraAnswer** messages. Every queue must have a **mq_maxmsg** attribute equal to **sizeof()** of the message. The queues paths are fixed and located in the **DuocamCommon::QueuePaths** namespace.
+The protocol is based on **POSIX message queues** (https://linux.die.net/man/7/mq_overview). Camera driver is responsible for the creation and the destruction of the **DuocamCommon::CameraCommand** and **DuocamCommon::CameraAnswer** message queues (that means the application has to **unlink** the queues before the exit). Every queue must have a **mq_maxmsg** attribute equal to **sizeof()** of the message. The queues paths are fixed and located in the **DuocamCommon::QueuePaths** namespace.
 
 ## DuocamCommon::CameraCommand
 
@@ -8,6 +8,7 @@ On the external event MAVLink service creates **DuocamCommon::CameraCommand** me
 - **DuocamCommon::CommandType::DoPhoto** - take a photo immiditely and write data from doPhotoPayload to EXIF.
 - **DuocamCommon::CommandType::StartRecord** - start a video record.
 - **DuocamCommon::CommandType::StopRecond** - stop a video record.
+- **DuocamCommon::CommandType::ChangeProperty** - change a camera property.
 
 MAVLink service waits configurable command timeout time for an answer from CameraDriver. If the answer isn't arrived, the command is marked as failed.
 
