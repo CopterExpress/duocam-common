@@ -23,7 +23,7 @@ namespace DuocamCommon
 
     struct CameraChangePropertyPayload
     {
-        float propertyId;
+        float id;
         float value;
     };
 
