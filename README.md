@@ -9,6 +9,10 @@ On the external event MAVLink service creates **DuocamCommon::CameraCommand** me
 - **DuocamCommon::CommandType::StartRecord** - start a video record.
 - **DuocamCommon::CommandType::StopRecond** - stop a video record.
 - **DuocamCommon::CommandType::ChangeProperty** - change a camera property.
+- **DuocamCommon::CommandType::CountProperties** - get camera properties count.
+- **DuocamCommon::CommandType::GetProperty** - get a camera property value.
+
+Command has a payload that depends on the command type.
 
 MAVLink service waits configurable command timeout time for an answer from CameraDriver. If the answer isn't arrived, the command is marked as failed.
 
@@ -16,8 +20,10 @@ MAVLink service waits configurable command timeout time for an answer from Camer
 
 ## DuocamCommon::CameraAnswer
 
-The camera driver sends an answer **only** when the operation is completed/failed and the driver is ready to recieve a new command of the **same type** (**DuocamCommon::CameraAnswer::type**). Possible answer types:
+The camera driver sends an answer **only** when the operation is completed/failed and the driver is ready to recieve a new command of the **same type** (**DuocamCommon::CameraAnswer::result**). Possible answer types:
 - **Ack** - the operation has been successfully completed. 
 - **Nack** - the operation has failed.
 
-In case the operation fails the camera driver can specify a string description of the error happened in **DuocamCommon::CameraAnswer::result** field. The maximum length of the comment can be determined from **DuocamCommon::cameraAnswerCommentSize**.
+In case the operation fails the camera driver can specify a string description of the error happened in **DuocamCommon::CameraAnswer::comment** field. The maximum length of the comment can be determined from **DuocamCommon::cameraAnswerCommentSize**.
+
+Optional field **DuocamCommon::CameraAnswer::value** can be used to add a numeric payload to the answer.

@@ -21,7 +21,7 @@ namespace DuocamCommon
         std::time_t time;
     };
 
-    struct CameraChangePropertyPayload
+    struct CameraPropertyPayload
     {
         float id;
         float value;
@@ -34,15 +34,17 @@ namespace DuocamCommon
             DoPhoto = 0,
             StartRecord,
             StopRecord,
-            ChangeProperty
+            SetProperty,
+            CountProperties,
+            GetProperty
         };
         CommandType type;
 
         union
         {
-            CameraChangePropertyPayload changePropertyPayload;
-            CameraDoPhotoPayload doPhotoPayload;
-        };
+            CameraPropertyPayload property;
+            CameraDoPhotoPayload doPhoto;
+        } payload;
     } __attribute__((packed));
 
     const int cameraAnswerCommentSize = 40;
@@ -56,10 +58,11 @@ namespace DuocamCommon
             Ack = 0,
             Nack
         };
-        
         CommandResult result;
 
         char comment[cameraAnswerCommentSize + 1];
+        
+        float value;
     } __attribute__((packed));
 };
 
