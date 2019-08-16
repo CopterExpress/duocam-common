@@ -21,7 +21,7 @@ namespace DuocamCommon
         std::time_t time;
     };
 
-    struct CameraChangePropertyPayload
+    struct CameraPropertyPayload
     {
         float propertyId;
         float value;
@@ -34,7 +34,7 @@ namespace DuocamCommon
             DoPhoto = 0,
             StartRecord,
             StopRecord,
-            ChangeProperty,
+            SetProperty,
             CountProperties,
             GetProperty
         };
@@ -42,7 +42,7 @@ namespace DuocamCommon
 
         union
         {
-            CameraChangePropertyPayload changeProperty;
+            CameraPropertyPayload property;
             CameraDoPhotoPayload doPhoto;
         } payload;
     } __attribute__((packed));
