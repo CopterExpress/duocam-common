@@ -34,15 +34,17 @@ namespace DuocamCommon
             DoPhoto = 0,
             StartRecord,
             StopRecord,
-            ChangeProperty
+            ChangeProperty,
+            CountProperties,
+            GetProperty
         };
         CommandType type;
 
         union
         {
-            CameraChangePropertyPayload changePropertyPayload;
-            CameraDoPhotoPayload doPhotoPayload;
-        };
+            CameraChangePropertyPayload changeProperty;
+            CameraDoPhotoPayload doPhoto;
+        } payload;
     } __attribute__((packed));
 
     const int cameraAnswerCommentSize = 40;
@@ -56,10 +58,11 @@ namespace DuocamCommon
             Ack = 0,
             Nack
         };
-        
         CommandResult result;
 
         char comment[cameraAnswerCommentSize + 1];
+        
+        float value;
     } __attribute__((packed));
 };
 
